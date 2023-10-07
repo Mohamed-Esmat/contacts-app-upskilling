@@ -15,7 +15,7 @@
 
 ## Introduction
 
-Welcome to the Sample React App, a project developed by Mohamed as a part of UpSkilling "Job Simulation Bootcamp" program. This app serves as a practical demonstration of your skills as a frontend developer, showcasing various features and best practices in React application development.
+Welcome to the Sample React App, a project developed by [Mohamed Esmat] as a part of [UpSkilling] "Job Simulation Bootcamp" program. This app serves as a practical demonstration of your skills as a frontend developer, showcasing various features and best practices in React application development.
 
 ## Features
 
@@ -114,4 +114,4 @@ If you'd like to contribute to this project, please follow the standard GitHub w
 
 ## License
 
-This project is licensed under the [License Name] - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the [MIT] - see the [LICENSE.md](LICENSE.md) file for details.
