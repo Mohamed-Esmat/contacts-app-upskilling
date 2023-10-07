@@ -1,0 +1,21 @@
+.contacts {
+  width: 76%; /* 1164px */
+  /* height: 80%;  667px */
+  background-color: transparent;
+  padding: 2rem 1rem;
+  border-radius: 1.56rem; /* 25px */
+  border: 1px solid #fff;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contacts__container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+}

@@ -1,0 +1,12 @@
+.pagination__container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: 4.41rem; /* 118.5px */
+}
+
+.pagination__container-page-info {
+  color: #fff;
+  font-size: 1.25rem; /* 20px */
+  margin: 0 1.19rem;
+}

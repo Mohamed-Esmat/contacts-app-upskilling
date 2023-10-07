@@ -1,0 +1,11 @@
+export { default as AddContact } from './AddContact';
+export { default as Contacts } from './Contacts';
+export { default as ContactsContainer } from './ContactsContainer';
+export { default as NewContactBtn } from './NewContactBtn';
+export { default as PaginationContainer } from './PaginationContainer';
+export { default as SearchBar } from './SearchBar';
+export { default as SingleContact } from './SingleContact';
+export { default as UpdateContact } from './UpdateContact';
+export { default as SubmitBtn } from './SubmitBtn';
+export { default as ErrorElement } from './ErrorElement';
+export { default as Loading } from './Loading';

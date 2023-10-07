@@ -1,0 +1,81 @@
+.single__contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  margin-top: 2.22rem; /* 35px */
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+.single__contact:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 57.19rem; /* 200px  */
+  height: 2px;
+  background-color: #FFF;
+}
+
+.single__contact-figure {
+  display: flex;
+  gap: 3rem;
+}
+
+.single__contact-image {
+  width: 6.81rem; /* 109 */
+  height: 6.625rem; /* 106px */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.single_contact-capture {
+  display: flex;
+  flex-direction: column;
+  /* align-items: start; */
+  justify-content: center;
+  gap: 1.75rem; /* 28px */
+}
+
+.single__contact-name,
+.single__contact-number {
+  font-family: Inter;
+  font-size: 1.25rem; /* 20px */
+  text-transform: capitalize;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.single__contact-name {
+  color: #fff;
+}
+
+.single__contact-number {
+  color: #d9d9d9;
+}
+
+.single__contact-action-buttons {
+  display: flex;
+  gap: 2.3125rem; /* 37px */
+}
+/* TEST */
+
+/* Responsive styles for larger screens (e.g., desktop) */
+@media screen and (min-width: 768px) {
+  .single-contact {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+
+  .single-contact__image {
+    width: 80px; /* Adjust the image width as needed */
+    height: 80px; /* Adjust the image height as needed */
+    margin-right: 20px;
+  }
+
+  .single-contact__capture {
+    text-align: left;
+  }
+}

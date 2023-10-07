@@ -1,0 +1,7 @@
+
+.bg-image {
+  background-image: url('../assets/premium_photo-1682125229972-a9cb5ed18762.avif');
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+}

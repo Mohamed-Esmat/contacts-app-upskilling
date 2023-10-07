@@ -1,0 +1,25 @@
+.contact__btn {
+  background-color: #1bb0f0;
+  color: #fff;
+  padding: 1.19rem 0.75rem; /* 19px 12px */
+  /* border-radius: 25px; */
+  display: flex;
+  align-items: center;
+  margin-top: 2.5rem; /* 40px */
+  margin-left: auto;
+}
+
+.contact__btn svg {
+  width: 1.367rem; /* 21.875px */
+  height: 1.367rem; /* 21.875px */
+  margin-right: 1rem;
+}
+
+.contact__btn-text {
+  color: #fff;
+
+  font-size: 1.125rem; /* 18px */
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

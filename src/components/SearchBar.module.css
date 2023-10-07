@@ -1,0 +1,20 @@
+.search__input {
+  width: 95%; /* 946px */
+  /* height: 45px; */
+  /*margin-top: 2rem;  32px */
+  border-radius: 25px;
+  background-color: #fff;
+  color: #000;
+  padding-top: 0.8125rem; /* 13px */
+  padding-bottom: 0.8125rem; /* 13px */
+  padding-left: 1.125rem; /* 18px */
+}
+
+.search__input::placeholder {
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 1.125rem; /* 18px */
+}
