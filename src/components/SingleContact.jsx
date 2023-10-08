@@ -1,5 +1,5 @@
-import { QueryClient, useMutation } from '@tanstack/react-query';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { customFetch, queryClient } from '../utils';
 import Modal from './Modal';
@@ -17,10 +17,7 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
   /****/
   // mutate event
 
-  const {
-    mutate,
-    isPending: isPendingDeletion,
-  } = useMutation({
+  const { mutate, isPending: isPendingDeletion } = useMutation({
     mutationFn: () =>
       customFetch.delete(id, {
         headers: {
@@ -71,8 +68,6 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
             <span className={modalStyles['modal__figure-icon']}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="100"
-                height="100"
                 viewBox="0 0 100 100"
                 fill="none"
               >
@@ -114,7 +109,7 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
             alt=""
             className={classes['single__contact-image']}
           />
-          <div className={classes['single_contact-capture']}>
+          <div className={classes['single__contact-capture']}>
             <h4 className={classes['single__contact-name']}>
               {firstName} {lastName}
             </h4>

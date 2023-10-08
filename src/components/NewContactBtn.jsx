@@ -3,7 +3,10 @@ import classes from './NewContactBtn.module.css';
 
 const NewContactBtn = () => {
   return (
-    <Link to='contacts/new' className={`${classes["contact__btn"]} rounded-3xl`}>
+    <Link
+      to="contacts/new"
+      className={`${classes['contact__btn']} rounded-3xl`}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="22"

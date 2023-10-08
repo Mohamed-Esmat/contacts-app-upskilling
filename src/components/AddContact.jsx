@@ -86,11 +86,11 @@ const AddContact = () => {
 
   return (
     <div className={classes['contact-form']}>
-      <Form method='POST' className={classes['contact-form__form']}>
+      <Form method="POST" className={classes['contact-form__form']}>
         {/* FORM IMAGE */}
         <div className={classes['contact-form__image']}>
           <input
-            name='image'
+            name="image"
             type="file"
             id="image-upload"
             accept="image/*"

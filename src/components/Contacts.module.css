@@ -1,11 +1,12 @@
 .contacts {
   width: 100%;
   margin-top: 2.22rem; /* 35.5px */
-  max-height: 300px; /* Adjust the height as needed */
+  max-height: 18.75rem; /* 300p x*/
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .contacts::-webkit-scrollbar {
   width: 0;
-  background: transparent; /* Optional: Set the background color of the scrollbar track */
+  background: transparent;
 }
