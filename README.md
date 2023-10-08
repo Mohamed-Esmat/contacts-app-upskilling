@@ -1,4 +1,4 @@
-# Sample React App
+# Contacts app
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -37,7 +37,6 @@ Welcome to the Sample React App, a project developed by [Mohamed Esmat] as a par
 - [react-router-dom](https://reactrouter.com/web/guides/quick-start)
 - [react-query](https://react-query.tanstack.com/)
 - [Axios](https://axios-http.com/)
-- [Other dependencies you may have used]
 
 ## Getting Started
 
@@ -59,7 +58,7 @@ git clone https://github.com/Mohamed-Esmat/contacts-app-upskilling.git
 2. Navigate to the project directory:
 
 ```shell
-cd sample-react-app
+cd contacts-app-upskilling
 ```
 
 3. Install the project dependencies:
@@ -89,9 +88,9 @@ To run the application, follow these steps:
 1. Start the development server:
 
 ```shell
-npm start
+npm run dev
 # or
-yarn start
+yarn run dev
 ```
 
 2. Open your browser and navigate to `http://localhost:3000` to access the app.
