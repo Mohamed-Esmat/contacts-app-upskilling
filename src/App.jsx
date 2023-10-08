@@ -31,7 +31,6 @@ const router = createBrowserRouter([
         id: 'contacts',
         element: <Landing />,
         errorElement: <ErrorElement />,
-        // loader: landingLoader(queryClient),
         loader: landingLoader,
       },
       {
@@ -39,13 +38,11 @@ const router = createBrowserRouter([
         element: <NewContact />,
         errorElement: <ErrorElement />,
         action: newContactAction,
-        // loader: productsLoader(queryClient),
       },
       {
         path: 'contacts/edit/:contactId',
         element: <EditContact />,
         errorElement: <ErrorElement />,
-        // loader: productsLoader(queryClient),
         id: 'edit-contact',
         loader: editLoader,
       },

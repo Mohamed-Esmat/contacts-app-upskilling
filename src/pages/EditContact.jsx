@@ -15,11 +15,6 @@ export const loader = async ({ params }) => {
 };
 
 const EditContact = () => {
-  // const params = useParams();
-  // console.log(params);
-  // const { contacts } = useRouteLoaderData('contacts');
-  // const contact = contacts.find((cont) => cont.id === params.id);
-  // console.log(contact);
   return <UpdateContact />;
 };
 

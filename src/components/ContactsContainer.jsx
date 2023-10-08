@@ -40,7 +40,7 @@ const ContactsContainer = () => {
         <SearchBar onSearch={getSearchValue} />
 
         {/* NEW CONTACT BTN */}
-        <div className={classes["align-content"]}>
+        <div className={classes['align-content']}>
           <NewContactBtn />
         </div>
 

@@ -14,7 +14,7 @@ body {
 }
 
 /* @layer components {
-  .align-element {
+  .align-content {
     @apply mx-auto max-w-6xl px-8;
   }
 } */

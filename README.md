@@ -4,6 +4,7 @@
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Demo](#demo)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -25,7 +26,7 @@ Welcome to the Sample React App, a project developed by [Mohamed Esmat] as a par
 - Implements loaders for improved user experience during data fetching
 - Comprehensive error handling
 - Smooth pagination of data
-- Robust form validation
+- Form validation
 - Utilizes Axios for making HTTP requests
 - Clean code and well-thought-out architecture
 - Upcoming lazy loading for improved performance (to be implemented)
@@ -37,6 +38,15 @@ Welcome to the Sample React App, a project developed by [Mohamed Esmat] as a par
 - [react-router-dom](https://reactrouter.com/web/guides/quick-start)
 - [react-query](https://react-query.tanstack.com/)
 - [Axios](https://axios-http.com/)
+
+## Demo
+
+You can try out the live demo of the Sample React App by visiting the following link:
+
+[Live Demo](https://esamt-upskilling-contacts.netlify.app)
+
+Feel free to explore the app's features and functionality in the demo environment.
+
 
 ## Getting Started
 
