@@ -10,7 +10,6 @@ import classes from './ContactsContainer.module.css';
 
 const ContactsContainer = () => {
   const { contacts } = useRouteLoaderData('contacts');
-  console.log(contacts);
 
   const [filteredContacts, setFilteredContacts] = useState([]);
   const [searchValue, setSearchValue] = useState('');
@@ -27,7 +26,7 @@ const ContactsContainer = () => {
         const { firstName, lastName } = contact;
         return `${firstName} ${lastName}`
           .toLowerCase()
-          .includes(`${searchValue}`);
+          .includes(`${searchValue}`.toLowerCase());
       });
       setFilteredContacts(filterContacts);
     }

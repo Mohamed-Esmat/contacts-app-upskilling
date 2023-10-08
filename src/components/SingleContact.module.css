@@ -30,7 +30,7 @@
   object-fit: cover;
 }
 
-.single_contact-capture {
+.single__contact-capture {
   display: flex;
   flex-direction: column;
   /* align-items: start; */
