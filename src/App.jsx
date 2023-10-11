@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {  QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { ErrorElement } from './components';
@@ -8,17 +8,11 @@ import { Error, HomeLayout, Landing, NewContact, EditContact } from './pages';
 // loaders
 import { loader as landingLoader } from './pages/Landing';
 import { loader as editLoader } from './pages/EditContact';
+import { queryClient } from './utils';
 
 //actions
-import { action as newContactAction } from './pages/NewContact';
+// import { action as newContactAction } from './pages/NewContact';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5,
-    },
-  },
-});
 
 const router = createBrowserRouter([
   {
@@ -31,20 +25,20 @@ const router = createBrowserRouter([
         id: 'contacts',
         element: <Landing />,
         errorElement: <ErrorElement />,
-        loader: landingLoader,
+        loader: landingLoader(queryClient),
       },
       {
         path: 'contacts/new',
         element: <NewContact />,
         errorElement: <ErrorElement />,
-        action: newContactAction,
+        // action: newContactAction,
       },
       {
         path: 'contacts/edit/:contactId',
         element: <EditContact />,
         errorElement: <ErrorElement />,
         id: 'edit-contact',
-        loader: editLoader,
+        loader: editLoader(queryClient),
       },
     ],
   },

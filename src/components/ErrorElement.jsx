@@ -16,7 +16,7 @@ const ErrorElement = () => {
           Sorry, we couldn't fetch this page.
         </p>
         <div className="mt-10">
-          <Link to="/contacts/new" className="btn btn-secondary">
+          <Link to="/" className="btn btn-secondary">
             {/* THIS SHOULD TAKE THE USER TO A BACKUP SITE */}
             go back home
           </Link>

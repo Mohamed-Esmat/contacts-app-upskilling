@@ -49,6 +49,11 @@
 
 .single__contact-name {
   color: #fff;
+  /* max-width: 70%; */
+  overflow-wrap: break-word;
+  overflow: 'hidden';
+  white-space: 'nowrap';
+  text-overflow: 'ellipsis';
 }
 
 .single__contact-number {

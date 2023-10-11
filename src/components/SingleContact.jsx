@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { customFetch, queryClient } from '../utils';
 import Modal from './Modal';
@@ -12,8 +12,9 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
 
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
-  console.log('search', search);
-  console.log('pathname', pathname);
+  // console.log('search', search);
+  // console.log('pathname', pathname);
+  // console.log(search);
   /****/
   // mutate event
 
@@ -27,8 +28,8 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['delete-contact'],
-        refetchType: 'none',
+        queryKey: ['delete-contact', id],
+        // refetchType: 'none',
       });
       toast('Successfully deleted the Contact.', {
         position: 'top-center',
@@ -119,7 +120,7 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
           </div>
         </div>
         <div className={classes['single__contact-action-buttons']}>
-          <Link to={`contacts/edit/${id}`}>
+          <Link to={`contacts/edit/${id}`} relative='path' >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="54"

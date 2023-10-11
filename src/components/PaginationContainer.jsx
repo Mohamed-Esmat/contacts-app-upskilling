@@ -10,18 +10,22 @@ const PaginationContainer = () => {
 
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
-  // console.log(search);
-  // console.log('pathname',pathname);
+
   const searchParams = new URLSearchParams(search);
-  if (+searchParams.get('page') > pageCount) {
-    searchParams.set('page', 0);
-    navigate(`${pathname}?${searchParams.toString()}`);
-  }
+  // if (+searchParams.get('page') > pageCount) {
+  //   // searchParams.set('page', 0);
+  //   // navigate(`${pathname}?${searchParams.toString()}`);
+  //   navigate(`${pathname}`);
+  // }
+
+
   const handlePageChange = (pageNumber) => {
-    // console.log('page', +searchParams.get('page'));
-    // console.log('pageCount', pageCount);
-    searchParams.set('page', pageNumber);
-    navigate(`${pathname}?${searchParams.toString()}`);
+    if (pageNumber === 0) {
+      navigate(`${pathname}`);
+    } else {
+      searchParams.set('page', pageNumber);
+      navigate(`${pathname}?${searchParams.toString()}`);
+    }
   };
 
   return (

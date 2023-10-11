@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Link, useNavigate } from 'react-router-dom';
 import classes from './AddContact.module.css';
-import defaultImage from '../assets/25f2bd4494b0a01437fa00e6822ccb2c.jpg';
+import defaultImage from '../assets/user-profile-pic.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { customFetch } from '../utils';
@@ -118,6 +118,7 @@ const AddContact = () => {
             type="text"
             id="firstName"
             name="firstName"
+            maxLength="50"
             value={formData.firstName}
             onChange={handleChange}
             className={classes['contact-form__input']}
@@ -127,6 +128,7 @@ const AddContact = () => {
             type="text"
             id="lastName"
             name="lastName"
+            maxLength="50"
             value={formData.lastName}
             onChange={handleChange}
             className={classes['contact-form__input']}
@@ -136,6 +138,7 @@ const AddContact = () => {
             type="phone"
             id="phone"
             name="phone"
+            maxLength="15"
             value={formData.phone}
             onChange={handleChange}
             className={classes['contact-form__input']}
@@ -145,6 +148,7 @@ const AddContact = () => {
             type="email"
             id="email"
             name="email"
+            maxLength="50"
             value={formData.email}
             onChange={handleChange}
             className={classes['contact-form__input']}

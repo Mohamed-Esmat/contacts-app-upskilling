@@ -29,11 +29,12 @@
 
   padding-top: 0.9rem;
   padding-bottom: 0.9rem;
-  /* 38px */
+  padding-left: 1.3rem; /* 38px */
 
   color: #000;
   font-size: 1.25rem; /* 20px */
   font-weight: 400;
+  overflow-wrap: break-word;
 }
 
 .contact-form__input::placeholder {
@@ -126,7 +127,7 @@
 
     padding-top: 0.9rem;
     padding-bottom: 0.9rem;
-    padding-left: 1.3rem;
+
     /* 38px */
 
     color: #000;
