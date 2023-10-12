@@ -22,13 +22,13 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
       customFetch.delete(id, {
         headers: {
           'Content-Type': 'application/json',
-          'app-id': '64fc4a747b1786417e354f31',
+          'app-id': '652808477418632024e30e89',
         },
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['delete-contact'],
-        refetchType: 'none',
+        // refetchType: 'none',
       });
       toast.success('Successfully deleted the Contact.', {
         position: 'top-center',

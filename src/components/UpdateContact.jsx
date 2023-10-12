@@ -236,7 +236,7 @@ const UpdateContact = () => {
         // Send only the updated fields and the updated image to the server
         const response = await customFetch.put(
           contact.id,
-          { firstName: 'mohamed10101' },
+          updatedFields,
           {
             headers: {
               'Content-Type': 'application/json',
