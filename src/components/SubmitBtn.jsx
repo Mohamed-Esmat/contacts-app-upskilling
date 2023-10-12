@@ -9,7 +9,7 @@ const SubmitBtn = ({ text, handleAction, styles }) => {
       type="submit"
       className={styles}
       disabled={isSubmitting}
-      onClick={handleAction}
+      onClick={(e) =>handleAction(e)}
     >
       {isSubmitting ? (
         <>

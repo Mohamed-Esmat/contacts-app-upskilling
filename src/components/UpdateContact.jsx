@@ -1,21 +1,52 @@
 import { useState } from 'react';
-import {
-  Form,
-  Link,
-  useNavigate,
-  useNavigation,
-  useRouteLoaderData,
-} from 'react-router-dom';
+import { Link, useRouteLoaderData } from 'react-router-dom';
+import defaultImage from '../assets/user-profile-pic.png';
 import classes from './UpdateContact.module.css';
 import { customFetch } from '../utils';
 import SubmitBtn from './SubmitBtn';
+import { ToastContainer, toast } from 'react-toastify';
+import useUpdatedInput from '../hooks/use-update-input';
 
 const UpdateContact = () => {
   const { contact } = useRouteLoaderData('edit-contact');
 
-  const navigate = useNavigate();
-  const navigation = useNavigation();
-  const isContactSubmitting = navigation.state === 'submitting';
+  const [enteredPicture, setEnteredPicture] = useState(
+    contact.picture || defaultImage
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    value: enteredFirstName,
+    isValid: enteredFirstNameIsValid,
+    hasError: firstNameInputHasError,
+    valueChangeHandler: firstNameChangeHandler,
+    inputBlurHandler: firstNameBlurHandler,
+  } = useUpdatedInput(contact.firstName, (value) => value.trim() !== '');
+
+  const {
+    value: enteredLastName,
+    isValid: enteredLastNameIsValid,
+    hasError: lastNameInputHasError,
+    valueChangeHandler: lastNameChangeHandler,
+    inputBlurHandler: lastNameBlurHandler,
+  } = useUpdatedInput(contact.lastName, (value) => value.trim() !== '');
+
+  const {
+    value: enteredPhone,
+    isValid: enteredPhoneIsValid,
+    hasError: phoneInputHasError,
+    valueChangeHandler: phoneChangeHandler,
+    inputBlurHandler: phoneBlurHandler,
+  } = useUpdatedInput(contact.phone, (value) => value.trim().length > 3);
+
+  const {
+    value: enteredEmail,
+    isValid: enteredEmailIsValid,
+    hasError: emailInputHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    // reset: emailReset,
+  } = useUpdatedInput(contact.email, (value) => value.trim() === contact.email);
 
   const originalData = {
     firstName: contact.firstName,
@@ -25,22 +56,10 @@ const UpdateContact = () => {
     picture: contact.picture,
   };
 
-  // const initialFormDate = { ...originalData };
-  const [formData, setFormData] = useState({ ...originalData });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevSnap) => {
-      return { ...prevSnap, [name]: value };
-    });
-  };
-
   const handleImageUpdate = (e) => {
     if (e.target.files.length !== 0) {
       const file = URL.createObjectURL(e.target.files[0]);
-      setFormData((prevSnap) => {
-        return { ...prevSnap, picture: file };
-      });
+      setEnteredPicture(file);
     }
   };
 
@@ -49,31 +68,151 @@ const UpdateContact = () => {
     document.getElementById('image-update').click();
   };
 
-  const handleUpdate = () => {
-    // Compare the formData with the originalData to find the updated fields
-    const updatedFields = {};
-    for (const key in formData) {
-      if (formData[key] !== originalData[key]) {
-        updatedFields[key] = formData[key];
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      console.log(enteredFirstNameIsValid);
+      if (
+        !enteredFirstNameIsValid ||
+        !enteredLastNameIsValid ||
+        !enteredPhoneIsValid ||
+        !enteredEmailIsValid ||
+        !enteredPicture
+      ) {
+        firstNameBlurHandler();
+        lastNameBlurHandler();
+        phoneBlurHandler();
+        emailBlurHandler();
+        toast.error('Please Enter a valid data!', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+        return;
+      } else if (enteredEmail !== originalData.email) {
+        toast.error("Please don't change the email!", {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+        return;
+      } else {
+        // Compare the formData with the originalData to find the updated fields
+        setIsSubmitting(true);
+        const formData = {
+          firstName: enteredFirstName,
+          lastName: enteredLastName,
+          phone: enteredPhone,
+          // email: enteredEmail,
+          picture: enteredPicture,
+        };
+        const updatedFields = {};
+        for (const key in formData) {
+          //check if the email is different from the original
+          if (formData[key] !== originalData[key]) {
+            updatedFields[key] = formData[key];
+          }
+        }
+        if (Object.keys(updatedFields).length === 0) {
+          console.log(updatedFields);
+          setIsSubmitting(false);
+          toast.error(`Please change any value ot update`, {
+            position: 'top-center',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          });
+          return;
+        }
+
+        for (const key in updatedFields) {
+          if (key === 'email') {
+            toast.error("Please don't update the email.", {
+              position: 'top-center',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'light',
+            });
+            return;
+          }
+        }
+        console.log('updatedFields', updatedFields);
+        // Send only the updated fields and the updated image to the server
+        const response = await customFetch.put(
+          contact.id,
+          { firstName: 'mohamed10101' },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'app-id': '64fc4a747b1786417e354f31',
+            },
+          }
+        );
+        if (response.status >= 200 && response.status < 300) {
+          setIsSubmitting(false);
+          toast.success('Successfully updated the Contact.', {
+            position: 'top-center',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+          });
+        }
       }
-    }
-
-    // Send only the updated fields and the updated image to the server
-    const updateContact = async () => {
-      await customFetch.put(contact.id, updatedFields, {
-        headers: {
-          'app-id': '64fc4a747b1786417e354f31',
-        },
+    } catch (error) {
+      setIsSubmitting(false);
+      if (error.response.data.error === 'BODY_NOT_VALID') {
+        toast.error("Something went wrong, Please try again later.", {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+        return;
+      }
+      console.log(error.response);
+      toast.error(error.response.data.data.data, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
       });
-    };
-    updateContact();
-
-    navigate('..');
+    }
   };
 
   return (
     <div className={classes['contact-form']}>
-      <Form className={classes['contact-form__form']}>
+      <form method="PUT" className={classes['contact-form__form']}>
         {/* FORM IMAGE */}
         <div className={classes['contact-form__image']}>
           <input
@@ -89,7 +228,7 @@ const UpdateContact = () => {
             onClick={handleImageClick}
           >
             <img
-              src={formData.picture}
+              src={enteredPicture || defaultImage}
               alt="contact image"
               className={classes['']}
               onClick={handleImageClick}
@@ -99,42 +238,78 @@ const UpdateContact = () => {
         </div>
 
         <div className={classes['contact-form__field']}>
-          <input
-            placeholder="First Name"
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            className={classes['contact-form__input']}
-          />
-          <input
-            placeholder="Last Name"
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            className={classes['contact-form__input']}
-          />
-          <input
-            placeholder="Phone Number"
-            type="text"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className={classes['contact-form__input']}
-          />
-          <input
-            placeholder="Email"
-            type="text"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={classes['contact-form__input']}
-          />
+          <div className="flex flex-col">
+            <input
+              placeholder="First Name"
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={enteredFirstName}
+              onChange={firstNameChangeHandler}
+              onBlur={firstNameBlurHandler}
+              className={`${classes['contact-form__input']} ${
+                firstNameInputHasError && classes['invalid']
+              } `}
+            />
+            {firstNameInputHasError && (
+              <p className="text-red-600">First name can't be empty!</p>
+            )}
+          </div>
+          <div className="flex flex-col">
+            <input
+              placeholder="Last Name"
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={enteredLastName}
+              onChange={lastNameChangeHandler}
+              onBlur={lastNameBlurHandler}
+              className={`${classes['contact-form__input']} ${
+                lastNameInputHasError && classes['invalid']
+              } `}
+            />
+            {lastNameInputHasError && (
+              <p className="text-red-600">Last name can't be empty!</p>
+            )}
+          </div>
+          <div className="flex flex-col">
+            <input
+              placeholder="Phone Number"
+              type="text"
+              id="phone"
+              name="phone"
+              value={enteredPhone}
+              onChange={phoneChangeHandler}
+              onBlur={phoneBlurHandler}
+              className={`${classes['contact-form__input']} ${
+                phoneInputHasError && classes['invalid']
+              } `}
+            />
+            {phoneInputHasError && (
+              <p className="text-red-600">
+                Phone need to be more than 3 numbers.
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-col">
+            <input
+              placeholder="Email"
+              type="text"
+              id="email"
+              name="email"
+              disabled
+              value={enteredEmail}
+              onChange={emailChangeHandler}
+              // onBlur={emailBlurHandler}
+              className={`${classes['contact-form__input']} ${
+                originalData.email !== enteredEmail && classes['invalid']
+              } `}
+            />
+            {originalData.email !== enteredEmail && (
+              <p className="text-red-600">Email can't be updated!</p>
+            )}
+          </div>
         </div>
         <div className={classes['contact-form__buttons']}>
           <Link
@@ -143,11 +318,20 @@ const UpdateContact = () => {
           >
             Cancel
           </Link>
-          <SubmitBtn
-            text="Update"
-            handleAction={handleUpdate}
-            styles={`${classes['contact-form__button']} ${classes['contact-form__button--save']}`}
-          />
+          {isSubmitting ? (
+            <SubmitBtn
+              text="Submitting..."
+              handleAction={handleUpdate}
+              styles={`${classes['contact-form__button']} ${classes['contact-form__button--save']}`}
+            />
+          ) : (
+            <SubmitBtn
+              text="Update"
+              handleAction={handleUpdate}
+              styles={`${classes['contact-form__button']} ${classes['contact-form__button--save']}`}
+            />
+          )}
+
           {/* <button
             type="submit"
             onClick={handleUpdate}
@@ -156,7 +340,19 @@ const UpdateContact = () => {
             {isContactSubmitting ? 'submitting...' : 'Update'}
           </button> */}
         </div>
-      </Form>
+      </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

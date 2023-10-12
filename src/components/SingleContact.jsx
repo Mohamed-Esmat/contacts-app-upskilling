@@ -12,8 +12,8 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
 
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
-  console.log('search', search);
-  console.log('pathname', pathname);
+  // console.log('search', search);
+  // console.log('pathname', pathname);
   /****/
   // mutate event
 
@@ -30,7 +30,7 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
         queryKey: ['delete-contact'],
         refetchType: 'none',
       });
-      toast('Successfully deleted the Contact.', {
+      toast.success('Successfully deleted the Contact.', {
         position: 'top-center',
         autoClose: 5000,
         hideProgressBar: false,
@@ -45,6 +45,19 @@ const SingleContact = ({ id, firstName, lastName, picture, phone }) => {
         navigate(`${pathname}${search}`);
       }, 5000);
     },
+    onError: () => {
+      setIsDeleting(false)
+      toast.error("Something went wrong we couldn't  delete the Contact.", {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
   });
 
   function handleStartDelete() {

@@ -10,7 +10,7 @@ import { loader as landingLoader } from './pages/Landing';
 import { loader as editLoader } from './pages/EditContact';
 
 //actions
-import { action as newContactAction } from './pages/NewContact';
+// import { action as newContactAction } from './pages/NewContact';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         path: 'contacts/new',
         element: <NewContact />,
         errorElement: <ErrorElement />,
-        action: newContactAction,
+        // action: newContactAction,
       },
       {
         path: 'contacts/edit/:contactId',

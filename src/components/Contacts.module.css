@@ -1,5 +1,6 @@
 .contacts {
   width: 100%;
+  /* max-height: 70%; */
   margin-top: 2.22rem; /* 35.5px */
   max-height: 18.75rem; /* 300p x*/
   overflow-y: auto;

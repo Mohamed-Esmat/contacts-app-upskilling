@@ -3,10 +3,17 @@
   align-items: center;
   justify-content: end;
   margin-top: 4.41rem; /* 118.5px */
+  margin-left: auto;
 }
 
 .pagination__container-page-info {
   color: #fff;
   font-size: 1.25rem; /* 20px */
   margin: 0 1.19rem;
+}
+
+@media screen and (max-width: 767px) {
+  .pagination__container{
+    margin-left: 0;
+  }
 }

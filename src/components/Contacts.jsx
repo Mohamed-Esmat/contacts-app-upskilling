@@ -5,7 +5,7 @@ const Contacts = ({ contacts }) => {
   return (
     <div className={classes['contacts']}>
       {contacts.map((contact) => {
-        console.log(contact);
+        // console.log(contact);
         return <SingleContact key={contact.id} {...contact} />;
       })}
     </div>

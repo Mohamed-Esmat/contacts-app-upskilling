@@ -8,8 +8,9 @@ export const loader = async ({ params }) => {
       'app-id': '64fc4a747b1786417e354f31',
     },
   });
-  console.log(response.data);
+  // console.log(response.data);
   const contact = response.data;
+  // console.log(contact);
   return { contact };
   // return null;
 };
