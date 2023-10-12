@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useState } from 'react';
 
 // const inputStateReducer = (state, action) => {
 //   if (action.type === 'INPUT') {
@@ -36,11 +36,12 @@ const useUpdatedInput = (value, validateValue) => {
 
   const inputBlurHandler = () => {
     // dispatch({ type: 'BLUR' });
-    setIsTouched(true)
+    setIsTouched(true);
   };
 
   // const reset = () => {
-  //   dispatch({ type: 'RESET' });
+  //   // dispatch({ type: 'RESET' });
+  //   setIsTouched(false);
   // };
 
   return {
@@ -49,7 +50,6 @@ const useUpdatedInput = (value, validateValue) => {
     hasError,
     valueChangeHandler,
     inputBlurHandler,
-    // reset,
   };
 };
 

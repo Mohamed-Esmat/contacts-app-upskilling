@@ -9,45 +9,6 @@ import useUpdatedInput from '../hooks/use-update-input';
 
 const UpdateContact = () => {
   const { contact } = useRouteLoaderData('edit-contact');
-
-  const [enteredPicture, setEnteredPicture] = useState(
-    contact.picture || defaultImage
-  );
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const {
-    value: enteredFirstName,
-    isValid: enteredFirstNameIsValid,
-    hasError: firstNameInputHasError,
-    valueChangeHandler: firstNameChangeHandler,
-    inputBlurHandler: firstNameBlurHandler,
-  } = useUpdatedInput(contact.firstName, (value) => value.trim() !== '');
-
-  const {
-    value: enteredLastName,
-    isValid: enteredLastNameIsValid,
-    hasError: lastNameInputHasError,
-    valueChangeHandler: lastNameChangeHandler,
-    inputBlurHandler: lastNameBlurHandler,
-  } = useUpdatedInput(contact.lastName, (value) => value.trim() !== '');
-
-  const {
-    value: enteredPhone,
-    isValid: enteredPhoneIsValid,
-    hasError: phoneInputHasError,
-    valueChangeHandler: phoneChangeHandler,
-    inputBlurHandler: phoneBlurHandler,
-  } = useUpdatedInput(contact.phone, (value) => value.trim().length > 3);
-
-  const {
-    value: enteredEmail,
-    isValid: enteredEmailIsValid,
-    hasError: emailInputHasError,
-    valueChangeHandler: emailChangeHandler,
-    inputBlurHandler: emailBlurHandler,
-    // reset: emailReset,
-  } = useUpdatedInput(contact.email, (value) => value.trim() === contact.email);
-
   const originalData = {
     firstName: contact.firstName,
     lastName: contact.lastName,
@@ -55,6 +16,120 @@ const UpdateContact = () => {
     email: contact.email,
     picture: contact.picture,
   };
+
+  const [enteredFirstName, setEnteredFirstName] = useState(
+    originalData.firstName
+  );
+  const [firstNameInputIsTouched, setFirstNameInputIsTouched] = useState(false);
+
+  const enteredFirstNameIsValid = enteredFirstName.trim() !== '';
+  const firstNameInputHasError =
+    !enteredFirstNameIsValid && firstNameInputIsTouched;
+
+  const firstNameChangeHandler = (event) => {
+    // dispatch({ type: 'INPUT', value: event.target.value });
+    setEnteredFirstName(event.target.value);
+  };
+
+  const firstNameBlurHandler = () => {
+    // dispatch({ type: 'BLUR' });
+    setFirstNameInputIsTouched(true);
+  };
+
+  //lastName
+  const [enteredLastName, setEnteredLastName] = useState(
+    originalData.lastName
+  );
+  const [lastNameInputIsTouched, setLastNameInputIsTouched] = useState(false);
+
+  const enteredLastNameIsValid = enteredLastName.trim() !== '';
+  const lastNameInputHasError =
+    !enteredLastNameIsValid && lastNameInputIsTouched;
+
+  const lastNameChangeHandler = (event) => {
+    setEnteredLastName(event.target.value);
+  };
+  const lastNameBlurHandler = () => {
+    setLastNameInputIsTouched(true);
+  };
+
+  //phone
+  const [enteredPhone, setEnteredPhone] = useState(
+    originalData.phone
+  );
+  const [phoneInputIsTouched, setPhoneInputIsTouched] = useState(false);
+
+  const enteredPhoneIsValid = enteredPhone.trim().length > 3;
+  const phoneInputHasError =
+    !enteredPhoneIsValid && phoneInputIsTouched;
+
+  const phoneChangeHandler = (event) => {
+    setEnteredPhone(event.target.value);
+  };
+  const phoneBlurHandler = () => {
+    setPhoneInputIsTouched(true);
+  };
+
+  //email
+  const [enteredEmail, setEnteredEmail] = useState(
+    originalData.email
+  );
+  const [emailInputIsTouched, setEmailInputIsTouched] = useState(false);
+
+  const enteredEmailIsValid = enteredEmail.trim().length > 3;
+  const emailInputHasError =
+    !enteredEmailIsValid && emailInputIsTouched;
+
+  const emailChangeHandler = (event) => {
+    setEnteredEmail(event.target.value);
+  };
+  const emailBlurHandler = () => {
+    setEmailInputIsTouched(true);
+  };
+
+  //picture
+  const [enteredPicture, setEnteredPicture] = useState(
+    contact.picture || defaultImage
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+
+
+  // const {
+  //   value: enteredFirstName,
+  //   isValid: enteredFirstNameIsValid,
+  //   hasError: firstNameInputHasError,
+  //   valueChangeHandler: firstNameChangeHandler,
+  //   inputBlurHandler: firstNameBlurHandler,
+  // } = useUpdatedInput(originalData.firstName, (value) => value.trim() !== '');
+
+  // const {
+  //   value: enteredLastName,
+  //   isValid: enteredLastNameIsValid,
+  //   hasError: lastNameInputHasError,
+  //   valueChangeHandler: lastNameChangeHandler,
+  //   inputBlurHandler: lastNameBlurHandler,
+  // } = useUpdatedInput(originalData.lastName, (value) => value.trim() !== '');
+
+  // const {
+  //   value: enteredPhone,
+  //   isValid: enteredPhoneIsValid,
+  //   hasError: phoneInputHasError,
+  //   valueChangeHandler: phoneChangeHandler,
+  //   inputBlurHandler: phoneBlurHandler,
+  // } = useUpdatedInput(originalData.phone, (value) => value.trim().length > 3);
+
+  // const {
+  //   value: enteredEmail,
+  //   isValid: enteredEmailIsValid,
+  //   hasError: emailInputHasError,
+  //   valueChangeHandler: emailChangeHandler,
+  //   inputBlurHandler: emailBlurHandler,
+  //   // reset: emailReset,
+  // } = useUpdatedInput(
+  //   originalData.email,
+  //   (value) => value.trim() === originalData.email
+  // );
 
   const handleImageUpdate = (e) => {
     if (e.target.files.length !== 0) {
@@ -72,7 +147,9 @@ const UpdateContact = () => {
     e.preventDefault();
 
     try {
-      console.log(enteredFirstNameIsValid);
+      console.log((enteredFirstName) => {
+        return enteredFirstName.trim() !== '';
+      });
       if (
         !enteredFirstNameIsValid ||
         !enteredLastNameIsValid ||
@@ -184,7 +261,7 @@ const UpdateContact = () => {
     } catch (error) {
       setIsSubmitting(false);
       if (error.response.data.error === 'BODY_NOT_VALID') {
-        toast.error("Something went wrong, Please try again later.", {
+        toast.error('Something went wrong, Please try again later.', {
           position: 'top-center',
           autoClose: 5000,
           hideProgressBar: false,
